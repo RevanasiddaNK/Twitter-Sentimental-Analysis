@@ -1,209 +1,124 @@
-# 🐦 Twitter Sentiment Analysis
+# Twitter Sentiment Analysis 🐦📊
 
-A machine learning project that performs sentiment analysis on 1.6M+ tweets using the [Sentiment140](http://help.sentiment140.com/for-students/) dataset. It classifies tweets as **positive** or **negative** using both Logistic Regression and Naive Bayes models, with visualization of sentiment trends over time.
-
----
-
-## 📊 Demo Results
-
-| Model              | Accuracy (%) |
-|--------------------|--------------|
-| Logistic Regression (TF-IDF) | 79.30% |
-| Naive Bayes (TF-IDF + Bigrams) | 77.96% |
+This project performs sentiment analysis on tweets using classical machine learning models. It uses **TF-IDF** for feature extraction, trains **Naive Bayes** and **Logistic Regression** models, and combines them with a **VotingClassifier** (soft voting). The model is then used to predict sentiment and visualize trends over time.
 
 ---
 
-## 🧠 Features
-
-- 🔄 Preprocessing: Cleaned tweets by removing usernames, links, punctuation, and stopwords.
-- 🧮 Feature Extraction: TF-IDF and Bigrams using `TfidfVectorizer`.
-- 🏁 ML Models: Trained Logistic Regression and Multinomial Naive Bayes.
-- 📈 Visualized sentiment trends over time using `matplotlib`.
-- ✅ Model Evaluation with accuracy scores and sample predictions.
-- 💾 Trained models stored as `.sav` files (external download link).
-
----
-
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
 
-Twitter-Sentimental-Analysis/
-├── train_model.ipynb           # Jupyter notebook for training and evaluation
-├── predict\_model.ipynb         # Notebook to test predictions from saved models
-├── requirements.txt            # Required libraries
-├── README.md                   # This file
-└── .gitignore
+├── train_model.ipynb           # Training notebook for TF-IDF + VotingClassifier
+├── predict_model.ipynb         # Load model and predict sentiment on new text
+├── sentiment_trend_plot.ipynb  # Visualization of sentiment trends using matplotlib
+├── requirements.txt            # Dependencies
+├── saved_model.pkl             # Trained pipeline model (TF-IDF + Voting)
+├── twitter_data.csv            # Input dataset (0 = Negative, 4 = Positive)
 
 ````
 
 ---
 
-## 🔍 Dataset
+## ✅ Features
 
-- **Source:** [Sentiment140](https://www.kaggle.com/datasets/kazanova/sentiment140)
-- **Size:** 1.6 million tweets
-- **Format:**
-  - `0`: Negative
-  - `4`: Positive
-  - Other columns: Tweet ID, date, query, username, tweet text
+- **TF-IDF Vectorization**: Converts text data into numerical features.
+- **MultinomialNB**: Naive Bayes classifier for text classification.
+- **LogisticRegression**: Another classical model for comparison and ensemble.
+- **VotingClassifier (soft)**: Combines predictions using averaged probabilities.
+- **Pipeline**: End-to-end model (TF-IDF + VotingClassifier) packed and saved.
+- **Sentiment Prediction**: Predict sentiment (0 = Negative, 4 = Positive) for new tweets.
+- **Trend Visualization**: Monthly sentiment trend plotted using `matplotlib`.
 
 ---
 
-## ⚙️ Installation
+## 📊 Dataset
 
-1. **Clone the repository**
+The dataset used is `twitter_data.csv`, which contains tweets labeled with:
+- `0`: Negative sentiment  
+- `4`: Positive sentiment
 
+Ensure the dataset contains at least:
+- `text`: The tweet content
+- `targett`: Sentiment label (0 or 4)
+- `date`: Date of tweet (used in trend analysis)
+
+---
+
+## 🚀 How to Run
+
+### 1. Install Requirements
 ```bash
-git clone https://github.com/RevanasiddaNK/Twitter-Sentimental-Analysis.git
-cd Twitter-Sentimental-Analysis
+pip install -r requirements.txt
 ````
 
-2. **Create a virtual environment (optional but recommended)**
+### 2. Train the Model
 
-```bash
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-```
+Open and run `train_model.ipynb` to:
 
-3. **Install dependencies**
+* Vectorize text
+* Train `MultinomialNB` and `LogisticRegression`
+* Combine with `VotingClassifier`
+* Save the model as `saved_model.pkl`
 
-```bash
-pip install -r requirements.txt
-```
+### 3. Predict Sentiment
 
----
+Open `predict_model.ipynb` to:
 
-## 🏋️‍♂️ Model Training
+* Load `saved_model.pkl`
+* Predict sentiment for new inputs
 
-Run the training notebook:
+### 4. Visualize Trends
 
-```bash
-jupyter notebook train_model.ipynb
-```
+Open `sentiment_trend_plot.ipynb` to:
 
-This:
-
-* Cleans the tweets
-* Extracts features using `TfidfVectorizer` with or without bigrams
-* Trains:
-
-  * Logistic Regression (TF-IDF)
-  * Naive Bayes (TF-IDF + Bigrams)
-* Saves models as `.sav` files
+* Plot sentiment trend over months using `matplotlib`
 
 ---
 
-## 🧪 Model Testing
+## 📌 Requirements
 
-Run the prediction notebook:
+* numpy
+* pandas
+* scikit-learn
+* matplotlib
+* joblib
 
-```bash
-jupyter notebook predict_model.ipynb
-```
-
-It loads the saved models and:
-
-* Predicts sentiment for individual tweets
-* Prints actual vs predicted values
+(Install via `requirements.txt`)
 
 ---
 
-## 📈 Sentiment Trend Visualization
+## 📷 Sample Output
 
-```python
-import matplotlib.pyplot as plt
-
-# Visualize number of positive and negative tweets by day
-df['date'] = pd.to_datetime(df['date'])
-df['sentiment'] = df['target'].replace({0: "Negative", 4: "Positive"})
-df['day'] = df['date'].dt.date
-
-plt.figure(figsize=(12,6))
-df.groupby(['day', 'sentiment']).size().unstack().plot(kind='line', linewidth=2, marker='o')
-plt.title("📊 Sentiment Trend Over Time")
-plt.xlabel("Date")
-plt.ylabel("Tweet Count")
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-```
+* 📈 Monthly sentiment trends for tweets (Positive vs Negative)
+* ✅ Console output showing accuracy and classification report
 
 ---
 
-## 💾 Model Downloads
+## 🧠 Model Insight
 
-Due to GitHub's 100 MB limit, trained models are hosted externally:
+The combination of Naive Bayes and Logistic Regression allows us to leverage:
 
-* [🔗 Logistic Regression Model (`lr_trained_model.sav`)](https://drive.google.com/your-link-here)
-* [🔗 Naive Bayes Model (`nb_trained_model.sav`)](https://drive.google.com/your-link-here)
-
-You can use `gdown` to download in code:
-
-```python
-!pip install gdown
-!gdown --id your_file_id_here
-```
+* Fast & robust performance of Naive Bayes on sparse text
+* Generalization capabilities of Logistic Regression
+  Soft voting combines them by averaging prediction probabilities.
 
 ---
 
-## ✅ Evaluation
-
-Example output:
-
-```
-📌 Model: Logistic Regression
-🔎 Predicting sentiment for tweet #400
-✅ Actual Sentiment   : Negative
-🤖 Predicted Sentiment: Positive
-```
-
----
-
-## 📦 Dependencies
-
-```
-numpy
-pandas
-scikit-learn
-matplotlib
-nltk
-tqdm
-```
-
-Install with:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🚀 Future Improvements
-
-* Add real-time Twitter API integration
-* Build a web app using Flask/Streamlit
-* Improve accuracy with deep learning models like LSTM/BERT
-* Export confusion matrix, ROC curves
-
----
-
-## 🙋‍♂️ Author
+## ✍️ Author
 
 **Revanasidda N Karigoudar**
-📧 [43.revanasidda@gmail.com](mailto:43.revanasidda@gmail.com)
-🔗 [LinkedIn](https://www.linkedin.com/in/revanasiddan/)
-🔗 [GitHub](https://github.com/RevanasiddaNK)
+AI & ML Engineer | Full-Stack Developer
+[GitHub](https://github.com/RevanasiddaNK)
 
 ---
 
 ## 📜 License
 
-MIT License – free to use and modify.
+This project is licensed for educational purposes.
 
 ```
 
 ---
 
-Let me know if you'd like me to include a download script for models or set this up as a `README.md` file for direct copy-paste.
+Let me know if you'd like badges (e.g., GitHub stars, Python version), or a markdown preview version.
 ```

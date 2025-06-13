@@ -1,21 +1,6 @@
-# Core ML and NLP
 numpy==1.26.4
 pandas==2.2.2
 scikit-learn==1.5.1
+matplotlib==3.9.1
 nltk==3.9.1
 joblib==1.4.2
-
-# Text Vectorization and Visualization
-matplotlib==3.9.1
-seaborn==0.13.2
-wordcloud==1.9.4
-
-# Optional - for downloading models or accessing datasets
-tqdm==4.67.1
-
-# If using TF-IDF and bigram vectorizers
-regex==2024.11.6
-
-# Jupyter (if using notebooks)
-notebook==7.2.1
-ipykernel==6.29.5
