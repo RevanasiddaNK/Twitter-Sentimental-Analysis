@@ -1,6 +1,3 @@
-
----
-
 ```markdown
 # 🐦 Twitter Sentiment Analysis
 
