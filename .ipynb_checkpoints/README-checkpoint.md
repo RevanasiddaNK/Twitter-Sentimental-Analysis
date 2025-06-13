@@ -12,7 +12,7 @@ This project performs sentiment analysis on tweets using classical machine learn
 ├── predict_model.ipynb         # Load model and predict sentiment on new text
 ├── sentiment_trend_plot.ipynb  # Visualization of sentiment trends using matplotlib
 ├── requirements.txt            # Dependencies
-├── saved_model.pkl             # Trained pipeline model (TF-IDF + Voting)
+├── model_pipeline.joblib       # Trained pipeline model (TF-IDF + Voting)
 ├── twitter_data.csv            # Input dataset (0 = Negative, 4 = Positive)
 
 ````
@@ -58,13 +58,13 @@ Open and run `train_model.ipynb` to:
 * Vectorize text
 * Train `MultinomialNB` and `LogisticRegression`
 * Combine with `VotingClassifier`
-* Save the model as `saved_model.pkl`
+* Save the model as `model_pipeline.joblib`
 
 ### 3. Predict Sentiment
 
 Open `predict_model.ipynb` to:
 
-* Load `saved_model.pkl`
+* Load `model_pipeline.joblib`
 * Predict sentiment for new inputs
 
 ### 4. Visualize Trends
@@ -112,13 +112,3 @@ AI & ML Engineer | Full-Stack Developer
 
 ---
 
-## 📜 License
-
-This project is licensed for educational purposes.
-
-```
-
----
-
-Let me know if you'd like badges (e.g., GitHub stars, Python version), or a markdown preview version.
-```
