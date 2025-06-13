@@ -1,4 +1,3 @@
-```markdown
 # 🐦 Twitter Sentiment Analysis
 
 A machine learning project that performs sentiment analysis on 1.6M+ tweets using the [Sentiment140](http://help.sentiment140.com/for-students/) dataset. It classifies tweets as **positive** or **negative** using both Logistic Regression and Naive Bayes models, with visualization of sentiment trends over time.
