@@ -8,8 +8,8 @@ A machine learning project that performs sentiment analysis on 1.6M+ tweets usin
 
 | Model              | Accuracy (%) |
 |--------------------|--------------|
-| Logistic Regression (TF-IDF) | 79.3% |
-| Naive Bayes (TF-IDF + Bigrams) | 78.1% |
+| Logistic Regression (TF-IDF) | 79.30% |
+| Naive Bayes (TF-IDF + Bigrams) | 77.96% |
 
 ---
 
@@ -31,7 +31,7 @@ A machine learning project that performs sentiment analysis on 1.6M+ tweets usin
 Twitter-Sentimental-Analysis/
 ├── data/
 │   └── sentiment140.csv        # Raw or cleaned tweet data
-├── train\_model.ipynb           # Jupyter notebook for training and evaluation
+├── train_model.ipynb           # Jupyter notebook for training and evaluation
 ├── predict\_model.ipynb         # Notebook to test predictions from saved models
 ├── requirements.txt            # Required libraries
 ├── README.md                   # This file
